@@ -1,0 +1,19 @@
+{
+  "name": "multiplayer-game",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "author": "hanwj75 <wjws9608@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "prettier": "^3.3.3"
+  }
+}
