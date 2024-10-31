@@ -1,3 +1,5 @@
+//환경 변수 세팅
+
 import dotenv from "dotenv";
 
 dotenv.config();
