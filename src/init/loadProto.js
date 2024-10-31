@@ -46,9 +46,9 @@ export const loadProtos = async () => {
     //Promise.all을 사용하여 portoFiles의 배열의 각 파일경로에 대해 비동기적으로 root.load(file)를 호출하여 모든 파일을 동시에 로드한다.
     //이 작업이 끝나면 root객체는 모든 .proto파일에 정의된 메시지 타입과 구조체를 메모리에 올린상태가 된다.
     await Promise.all(
-      protoFiles.map(async (file) => {
-        await root.load(file); //각 파일을 읽고 파싱하여 root객체에 포함시키는 함수다.
-      }),
+      protoFiles.map(
+        (file) => root.load(file), //각 파일을 읽고 파싱하여 root객체에 포함시키는 함수다.
+      ),
     );
 
     for (const [packetName, types] of Object.entries(packetNames)) {
