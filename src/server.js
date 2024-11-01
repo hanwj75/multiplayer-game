@@ -9,8 +9,8 @@ const server = net.createServer(onConnection);
 
 initServer()
   .then(() => {
-    server.listen(() => {
-      console.log(`서버 켜짐 ${PORT} : ${HOST}`);
+    server.listen(PORT, HOST, () => {
+      console.log(`서버 켜짐${HOST}  : ${PORT}`);
     });
   })
   .catch((err) => {

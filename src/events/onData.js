@@ -1,4 +1,5 @@
 import { PACKET_TYPE, PACKET_TYPE_LENGTH, TOTAL_LENGTH } from "../constants/header.js";
+import { getHandlerById } from "../handler/index.js";
 import { packetParser } from "../utils/parser/packetParser.js";
 
 //커링기법을 사용해서 소켓과 데이터를 함께 받는다.
@@ -13,7 +14,7 @@ export const onData = (socket) => (data) => {
     //length = 전체길이 / 실제 데이터의 끝 위치
     const length = socket.buffer.readUInt32BE(0); //0:0번째부터 읽겠다는뜻 4바이트까지 즉 TOTAL_LENGTH까지의 값을 읽음
     //패킷타입이 들어간 부분
-    const packetType = socket.buffer.readUInt8BE(TOTAL_LENGTH); //TOTAL_LENGTH부터 읽겠다는뜻 8비트 까지만 값을 읽음 즉 1바이트
+    const packetType = socket.buffer.readUInt8(TOTAL_LENGTH); //TOTAL_LENGTH부터 읽겠다는뜻 8비트 까지만 값을 읽음 즉 1바이트
 
     if (socket.buffer.length >= length) {
       //헤더를 잘라낸 나머지 부분이 실제데이터
@@ -25,8 +26,10 @@ export const onData = (socket) => (data) => {
         //패킷 파서
         switch (packetType) {
           case PACKET_TYPE.NORMAL: {
-            const result = packetParser(packet);
-            console.log(`🤪 ~ file: onData.js:29 ~ onData ~ result:`, result);
+            const { handlerId, userId, payload } = packetParser(packet);
+            const handler = getHandlerById(handlerId);
+
+            handler({ socket, userId, payload });
           }
         }
       } catch (err) {
