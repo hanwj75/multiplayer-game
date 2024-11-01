@@ -1,12 +1,17 @@
 //모든 핸들러를 관리하는 index
 
 import { HANDLER_IDS } from "../constants/handlerIds.js";
+import locationUpdateHandler from "./game/locationUpdate.handler.js";
 import initialHandler from "./user/initial.handler.js";
 
 const handlers = {
   [HANDLER_IDS.INITIAL]: {
     handler: initialHandler,
     protoType: "initial.InitialPayload",
+  },
+  [HANDLER_IDS.LOCATION_UPDATE]: {
+    handler: locationUpdateHandler,
+    protoType: "game.LocationUpdatePayload",
   },
 };
 
@@ -26,7 +31,7 @@ export const getHandlerById = (handlerId) => {
 //핸들러를 읽어서 protoType을 불러내는 로직
 export const getProtoTypeNameByHandlerId = (handlerId) => {
   let handlerIds = handlers[handlerId];
-  console.log(`🤪 ~ file: index.js:29 ~ getProtoTypeNameByHandlerId ~ handlerIds:`, handlerIds);
+
   if (!handlers[handlerId]) {
     throw Error();
   }

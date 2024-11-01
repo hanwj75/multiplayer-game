@@ -9,7 +9,6 @@ const initServer = async () => {
     await loadProtos();
     const gameId = uuidv4(); //게임생성시 인자로 넣어줄 gameId를 UUID로 생성
     const gameSession = addGameSession(gameId);
-    console.log(`🤪 ~ file: index.js:12 ~ initServer ~ gameSession:`, gameSession);
   } catch (err) {
     console.error(err);
     process.exit(1);

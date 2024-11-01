@@ -14,11 +14,11 @@ class User {
     this.lastUpdateTime = Date.now();
   }
 
-  //내 위치 업데이트
-  updataPosition(x, y) {
+  //유저의 위치 업데이트하는 메서드
+  updatePosition(x, y) {
     this.x = x;
     this.y = y;
-    this.lastUpdateTime = Data.now();
+    this.lastUpdateTime = Date.now();
   }
 }
 
