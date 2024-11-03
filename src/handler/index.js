@@ -19,7 +19,6 @@ const handlers = {
 
 //맵핑한 핸들러를 호출하는 함수
 export const getHandlerById = (handlerId) => {
-  let handlerIds = handlers[handlerId];
   if (!handlers[handlerId]) {
     throw Error();
   }
@@ -30,8 +29,6 @@ export const getHandlerById = (handlerId) => {
 //외부에서 핸들러를 읽을수 있게 해주는 함수
 //핸들러를 읽어서 protoType을 불러내는 로직
 export const getProtoTypeNameByHandlerId = (handlerId) => {
-  let handlerIds = handlers[handlerId];
-
   if (!handlers[handlerId]) {
     throw Error();
   }

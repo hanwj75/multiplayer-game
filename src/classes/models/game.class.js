@@ -1,3 +1,5 @@
+import { createLocationPacket } from "../../utils/notification/game.notification.js";
+
 class Game {
   constructor(id) {
     this.id = id; //인스턴스 생성시 외부에서 받아온 ID
@@ -27,9 +29,23 @@ class Game {
     }
   }
 
-  //현재 접속한 모든 유저의 데이터를 사용자에게 보내줌
-  //멀티플레이에서는 다른 유저의 정보도 필요하기때문인듯
-  getAllLocation() {}
+  /**
+   * @desc getAllLocation함수
+   * @todo 현재 접속한 모든 유저의 데이터를 사용자에게 보내주는 메서드
+   * 멀티 플레이에서는 다른 유저의 정보도 필요하므로 다른유저의 정보를 받아오도록 구현
+   * 여기서 본인은 제외해야 하므로 userId를 인자로 받아와 본인의 데이터 제외
+   */
+  getAllLocation(userId) {
+    //현재 접속한 유저들중 본인의 userId와 다른값을 필터링
+    const locationData = this.users
+      .filter((user) => user.id !== userId) // 본인의 userId와 다른 유저 핉터링
+      //
+      .map((user) => {
+        //필터링된 유저의 정보를 포함하는 객체를 생성
+        return { id: user.id, playerId: user.playerId, x: user.x, y: user.y };
+      });
+    return createLocationPacket(locationData);
+  }
 }
 
 export default Game;

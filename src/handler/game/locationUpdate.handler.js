@@ -22,7 +22,15 @@ const locationUpdateHandler = ({ socket, userId, payload }) => {
 
     //유저의 위치를 업데이트하는 메서드를 호출
     user.updatePosition(x, y);
-    socket.write("");
+
+    //다른 유저들에 대한 위치를 읽어온다.
+    const locationData = gameSession.getAllLocation(userId);
+    console.log(
+      `🤪 ~ file: locationUpdate.handler.js:28 ~ locationUpdateHandler ~ locationData:`,
+      locationData,
+    );
+
+    socket.write(locationData);
   } catch (err) {
     console.error(err, `locationHandler Err`);
   }
