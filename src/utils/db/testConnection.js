@@ -1,4 +1,4 @@
-import pools from "../../db/user/database.js";
+import pools from "../../db/database.js";
 
 // 데이터베이스 연결을 테스트하는 비동기 함수 정의
 export const testConnection = async (pool) => {

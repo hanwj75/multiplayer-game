@@ -1,8 +1,8 @@
 //db연결과 관련된 코드
 
 import mysql from "mysql2/promise"; // mtsql2 패키지  가져옴 (비동기 프로미스 지원)
-import { config } from "../../config/config.js";
-import { formatDate } from "../../utils/dateFomatter.js";
+import { config } from "../config/config.js";
+import { formatDate } from "../utils/dateFomatter.js";
 
 //db 연결 풀을 생성하는 함수
 const createPool = () => {
