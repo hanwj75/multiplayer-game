@@ -31,4 +31,16 @@ export const createLocationPacket = (users) => {
   return serializer(locationPacket, PACKET_TYPE.LOCATION);
 };
 
-//클라이언트 실행이 안됨 서버 켜지는 도중에 시도할경우만 실행됨
+export const createPingPacket = (timestamp) => {
+  const protoMessages = getProtoMessages(); //proto메시지 가져옴
+  //공통 Ping메시지를 참조한다.
+  const ping = protoMessages.common.Ping;
+  //페이로드에 타임스탬프를 추가한다.
+  const payload = { timestamp };
+  //위치 정보를 기반으로 메시지 생성
+  const message = location.create(payload);
+  //생성한 메시지를 인코딩 하여 핑 패킷 만듬
+  const pingPacket = location.encode(message).finish();
+  //핑 패킷 직렬화하여 반환
+  return serializer(pingPacket, PACKET_TYPE.PING);
+};
