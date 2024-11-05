@@ -14,3 +14,17 @@
 <h3 >🛠 Tools 🛠</h3>
 
 <img src="https://img.shields.io/badge/VSCode-21759B.svg?style=for-the-badge&logo=vscode&logoColor=white" />
+
+## 프로젝트 실행
+
+1. 의존성 설치
+
+```
+yarn install
+```
+
+2. 서버 실행
+
+```
+yarn dev
+```
