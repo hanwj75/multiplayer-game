@@ -59,8 +59,6 @@ export const loadProtos = async () => {
     }
 
     console.log(`Protobuf파일 로드 성공`);
-
-    // console.log(`🤪 ~ file: loadProto.js:55 ~ loadProtos ~ protoMessages:`, protoMessages);
   } catch (err) {
     console.error(`Protobuf파일 로드 중 오류 발생`, err);
   }

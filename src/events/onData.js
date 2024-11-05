@@ -1,5 +1,7 @@
 import { PACKET_TYPE, PACKET_TYPE_LENGTH, TOTAL_LENGTH } from "../constants/header.js";
 import { getHandlerById } from "../handler/index.js";
+import { getProtoMessages } from "../init/loadProto.js";
+import { getUserBySocket } from "../sessions/user.session.js";
 import { packetParser } from "../utils/parser/packetParser.js";
 
 //커링기법을 사용해서 소켓과 데이터를 함께 받는다.
@@ -25,6 +27,15 @@ export const onData = (socket) => (data) => {
       try {
         //패킷 파서
         switch (packetType) {
+          case PACKET_TYPE.PING:
+            {
+              const protoMessages = getProtoMessages(); //protobuf메세지를 로드해 온다.
+              const Ping = protoMessages.common.Ping; //protoMessages에서 common.Ping타입을 가져옴
+              const pingPacket = Ping.decode(packet);
+              const user = getUserBySocket(socket);
+              user.handlerPong(pingPacket);
+            }
+            break;
           case PACKET_TYPE.NORMAL: {
             const { handlerId, userId, payload } = packetParser(packet);
             const handler = getHandlerById(handlerId);
@@ -35,6 +46,8 @@ export const onData = (socket) => (data) => {
       } catch (err) {
         console.error(err, `데이터 패킷 오류`);
       }
+    } else {
+      break;
     }
   }
 };

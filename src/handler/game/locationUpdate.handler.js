@@ -11,7 +11,7 @@ const locationUpdateHandler = ({ socket, userId, payload }) => {
       return; //게임이 없을시 중지
     }
 
-    console.log(gameSession); //현재 위치한 게임 세션 로그
+    // console.log(gameSession); //현재 위치한 게임 세션 로그
 
     const user = gameSession.getUser(userId); //현재 세션에서 유저객체를 조회
 
@@ -25,10 +25,6 @@ const locationUpdateHandler = ({ socket, userId, payload }) => {
 
     //다른 유저들에 대한 위치를 읽어온다.
     const locationData = gameSession.getAllLocation(userId);
-    console.log(
-      `🤪 ~ file: locationUpdate.handler.js:28 ~ locationUpdateHandler ~ locationData:`,
-      locationData,
-    );
 
     socket.write(locationData);
   } catch (err) {

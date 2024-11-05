@@ -5,7 +5,7 @@
 export const packetNames = {
   common: {
     Packet: "common.Packet", //common.Packet:protobuf를 사용할때 사용할 이름
-    ping: "common.Ping",
+    Ping: "common.Ping",
   },
   initial: {
     InitialPayload: "initial.InitialPayload",

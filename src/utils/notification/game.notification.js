@@ -19,6 +19,7 @@ const serializer = (message, type) => {
 //유저들의 x,y값이 들어있는 배열을 인자로 받아와 패킷을 생성하는 함수
 export const createLocationPacket = (users) => {
   const protoMessages = getProtoMessages(); //proto메시지 가져옴
+
   const location = protoMessages.gameNotification.LocationUpdate; //위치 업데이트 메시지 타입 가져옴
 
   //유저 정보를 포함하는 페이로드를 생성
@@ -32,15 +33,15 @@ export const createLocationPacket = (users) => {
 };
 
 export const createPingPacket = (timestamp) => {
-  const protoMessages = getProtoMessages(); //proto메시지 가져옴
-  //공통 Ping메시지를 참조한다.
-  const ping = protoMessages.common.Ping;
+  const protoMessages = getProtoMessages(); // proto 메시지 가져옴
+  const ping = protoMessages.common.Ping; // 대소문자 확인
   //페이로드에 타임스탬프를 추가한다.
+
   const payload = { timestamp };
   //위치 정보를 기반으로 메시지 생성
-  const message = location.create(payload);
+  const message = ping.create(payload); // ping 사용
   //생성한 메시지를 인코딩 하여 핑 패킷 만듬
-  const pingPacket = location.encode(message).finish();
+  const pingPacket = ping.encode(message).finish();
   //핑 패킷 직렬화하여 반환
   return serializer(pingPacket, PACKET_TYPE.PING);
 };

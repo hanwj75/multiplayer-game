@@ -42,6 +42,7 @@ class User {
   handlerPong(data) {
     const now = Date.now();
     this.latency = (now - data.timestamp) / 2; // 지연 시간을 계산 (왕복 시간의 절반)
+    console.log(`${this.id}:${this.latency}ms`);
   }
   // 추측 항법 계산하는 메서드
   calculatePosition(letency) {
